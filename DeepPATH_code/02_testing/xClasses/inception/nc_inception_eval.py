@@ -63,9 +63,12 @@ def _eval_once(saver, summary_writer, top_1_op, top_5_op, summary_op, max_percen
     top_5_op: Top 5 op.
     summary_op: Summary op.
   """
-  tf.initialize_all_variables()
+  # tf.initialize_all_variables is deprecated and removed. Use tf.global_variables_initializer instead.
+  #tf.initialize_all_variables()
+  tf.global_variables_initializer()
   with tf.Session() as sess:
     ckpt = tf.train.get_checkpoint_state(FLAGS.checkpoint_dir)
+    print("****model_checkpoint_path: {}******".format(ckpt.model_checkpoint_path))
     if ckpt and ckpt.model_checkpoint_path:
       if os.path.isabs(ckpt.model_checkpoint_path):
         # Restores from checkpoint with absolute path.
