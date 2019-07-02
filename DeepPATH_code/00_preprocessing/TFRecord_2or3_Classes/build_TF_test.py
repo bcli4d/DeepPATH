@@ -30,6 +30,8 @@ import threading
 import numpy as np
 import tensorflow as tf
 
+import glob
+
 tf.app.flags.DEFINE_string('directory', '/ifs/home/coudrn01/NN/Lung/Test_All512pxTiled/tmp_4_2Types/',
                            'Training data directory')
 tf.app.flags.DEFINE_string('output_directory', '/ifs/home/coudrn01/NN/Lung/Test_All512pxTiled/tmp_4_2Types/',
@@ -425,7 +427,8 @@ def _find_image_files(name, data_dir):
 #    jpeg_file_path = '%s/%s/*' % (data_dir, text)
     typeIm = name + '*.jpeg'
     jpeg_file_path = os.path.join(data_dir, text, typeIm)
-    matching_files = tf.gfile.Glob(jpeg_file_path)
+#    matching_files = tf.gfile.Glob(jpeg_file_path)
+    matching_files = glob.glob(jpeg_file_path) # python glob is much faster. 
     #print(matching_files)
     if len(matching_files) < 1:
       typeIm = name + '*.jpg'
