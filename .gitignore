@@ -1,1 +1,5 @@
 LungCancer/LungCancer/LungCancer_2classes
+*.pyc
+*bazel*
+*~
+*bak
